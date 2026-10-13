@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>BINI Voting Team | Link Hub</title>
+<style>
+  :root {
+    --bg: #090909;
+    --panel: #121214;
+    --panel-hover: #19191c;
+    --line: #29292d;
+    --muted: #85858d;
+    --text: #f1f1f2;
+    --teal: #43e8d8;
+    --cyan: #b9f0f2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--text);
+    background: var(--bg);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  a { color: inherit; text-decoration: none; }
+.topbar {
+min-height: 63px;
+padding: 0 3.1%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 24px;
+background: rgba(11,11,11,.96);
+border-bottom: 1px solid #1b1b1d;
+position: relative;
+z-index: 10;
+}
+
+.topnav {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 28px;
+}
+
+.topnav a {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+color: #a4a4a9;
+font-size: 11px;
+font-weight: 600;
+text-decoration: none;
+transition: color .2s ease;
+white-space: nowrap;
+}
+
+.topnav a {
+color: var(--text);
+}
+
+/* Mobile layout */
+@media (max-width: 760px) {
+.topbar {
+flex-direction: column;
+align-items: flex-start;
+padding: 18px 5%;
+gap: 18px;
+}
+
+.topnav {
+width: 100%;
+justify-content: flex-start;
+flex-wrap: wrap;
+gap: 14px 20px;
+}
+
+.topnav a {
+font-size: 10px;
+}
+}
+  .brandline {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: .34em;
+    color: #a4a4a9;
+    text-transform: uppercase;
+  }
+  .brandline b { color: var(--teal); margin: 0 9px; }
+  .manage {
+    border: 1px solid var(--teal);
+    border-radius: 999px;
+    padding: 9px 15px;
+    font: 700 10px ui-monospace, monospace;
+    letter-spacing: .18em;
+    color: #d6d6d8;
+    background: #121214;
+  }
+  .hero-banner {
+    height: 400px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+    isolation: isolate;
+    /* Replace hero-banner.jpg with your own image file name.
+       Keep the image in the same folder as this HTML file. */
+    background: #101214 url("hero-banner.jpg") center / cover no-repeat;
+  }
+  .hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.24));
+    pointer-events: none;
+  }
+  .hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: -30% -8%;
+    z-index: -1;
+    opacity: .34;
+    background:
+      linear-gradient(62deg, transparent 0 19%, rgba(49,120,125,.22) 19.1%, transparent 19.5% 31%, rgba(49,120,125,.2) 31.1%, transparent 31.5% 45%, rgba(49,120,125,.18) 45.1%, transparent 45.5%),
+      linear-gradient(125deg, transparent 0 74%, rgba(255,255,255,.32) 74.1%, transparent 74.5%);
+    transform: skewY(-5deg);
+  }
+  .banner-logo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    color: #003039;
+    filter: drop-shadow(0 2px 1px rgba(0,0,0,.05));
+  }
+  .vote-symbol {
+    width: 210px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .ballot {
+    height: 125px;
+    width: 83px;
+    border: 7px solid currentColor;
+    border-right-width: 5px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    font-size: 65px;
+    line-height: 1;
+  }
+  .ballot::before {
+    content: "▪\A▪\A▪\A▪\A▪";
+    white-space: pre;
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    font-size: 19px;
+    line-height: 18px;
+  }
+  .ballot .star { font-size: 70px; transform: rotate(-20deg); margin-left: 10px; }
+  .checkcard {
+    width: 75px;
+    height: 123px;
+    display: grid;
+    place-items: center;
+    color: #b9eff0;
+    background: #003039;
+    font-size: 62px;
+    font-weight: 800;
+    margin-left: -1px;
+  }
+  .banner-divider { width: 3px; height: 170px; background: #003039; }
+  .banner-words { font-weight: 950; line-height: .87; letter-spacing: -.075em; }
+  .banner-words span { display: block; font-size: clamp(45px, 6vw, 78px); }
+  .banner-words span + span { margin-top: 12px; }
+  .intro {
+    padding: 60px 3.1% 66px;
+    position: relative;
+    overflow: hidden;
+  }
+  .intro-content { position: relative; z-index: 1; }
+  h1 {
+    font-size: clamp(45px, 8.3vw, 108px);
+    text-align: center;
+    line-height: .96;
+    letter-spacing: -.075em;
+    font-weight: 950;
+    font-style: italic;
+    margin: 0 0 22px;
+  }
+  .subtitle { font-size: 23px; font-weight: 650; color: #c9c9cb; margin: 0 0 22px; text-align: center;}
+  .contact { color: #a5a5aa; font-size: 15px; margin: 0 0 50px; text-align: center; }
+  .contact .mail { margin-right: 8px; }
+  .lime-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--teal);
+    color: #080808;
+    border-radius: 999px;
+    padding: 14px 27px;
+    font: 800 10px ui-monospace, monospace;
+    letter-spacing: .23em;
+    transition: transform .2s, filter .2s;
+  }
+  .lime-button:hover { transform: translateY(-2px); filter: brightness(.94); }
+  .section { padding: 0 6.5% 90px; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 15px;
+    margin-bottom: 28px;
+  }
+  .section-kicker {
+    margin: 0;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: .34em;
+    font: 800 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .section-number { color: #77777d; font: 10px ui-monospace, monospace; letter-spacing: .2em; }
+  .voting-grid { display: flex; flex-direction: column; gap: 12px; }
+  .social-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .vote-card, .social-card {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 16px;
+    min-width: 0;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  .vote-card:hover, .social-card:hover { background: var(--panel-hover); border-color: #414146; transform: translateY(-2px); }
+  .vote-card { padding: 20px 22px; display: flex; flex-direction: column; align-items: stretch; gap: 16px; }
+  .vote-card .vote-top { align-items: center; }
+  .vote-card .vote-title { max-width: none; }
+  .vote-card .categories { align-items: center; }
+  .vote-card .vote-link { border-top: 1px solid #29292d; border-left: 0; padding: 15px 0 0; margin: 0; min-width: 0; }
+  .category-list-card {
+    border: 1px solid var(--line);
+    background: #101012;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .category-list-card .category {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 14px 16px;
+    color: #c6c6cb;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .category-list-card .category + .category {
+    border-top: 1px solid #29292d;
+  }
+  .category-list-card .category:hover,
+  .category-list-card .category:focus-visible {
+    color: var(--teal);
+    background: #161b1c;
+  }
+  .category-arrow { color: var(--teal); flex: 0 0 auto; }
+
+  .vote-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .vote-title { font-size: 19px; line-height: 1.2; font-weight: 800; letter-spacing: -.035em; }
+  .status {
+    color: var(--teal);
+    border: 1px solid rgba(0, 255, 234, 0.452);
+    border-radius: 999px;
+    padding: 6px 8px;
+    font: 800 8px ui-monospace, monospace;
+    letter-spacing: .12em;
+    white-space: nowrap;
+  }
+  .categories { display: flex; flex-wrap: wrap; gap: 7px; }
+  .category {
+    display: inline-flex;
+    align-items: center;
+    color: #b7b7bd;
+    border: 1px solid #303035;
+    background: #19191c;
+    border-radius: 7px;
+    padding: 7px 9px;
+    font-size: 11px;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: color .2s, border-color .2s, background .2s;
+  }
+  .category:hover, .category:focus-visible {
+    color: var(--teal);
+    border-color: rgba(19, 255, 243, 0.55);
+    background: #1a2221;
+    outline: none;
+  }
+  .vote-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #29292d;
+    padding-top: 15px;
+    margin-top: auto;
+    color: var(--teal);
+    font: 800 10px ui-monospace, monospace;
+    letter-spacing: .16em;
+  }
+  .social-section { padding-top: 0; }
+  .social-card { min-height: 88px; padding: 18px; display: flex; align-items: center; gap: 14px; }
+  .social-icon {
+    width: 40px; height: 40px; flex: 0 0 40px;
+    display: grid; place-items: center;
+    border: 1px solid #29292d; border-radius: 12px;
+    color: var(--teal); background: #1a1a1d;
+    font-size: 20px; font-weight: 800;
+  }
+  .social-name { font-weight: 750; font-size: 16px; letter-spacing: -.03em; }
+  .external { color: #8e8e94; font-size: 13px; margin-left: 4px; }
+  .domain { margin-top: 9px; color: #73737b; font: 9px ui-monospace, monospace; letter-spacing: .2em; }
+  footer { border-top: 1px solid var(--line); background: #0c0c0e; }
+  .footer-main {
+    padding: 50px 6.5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: start;
+    gap: 40px;
+  }
+  .footer-brand { font-size: 19px; font-weight: 950; font-style: italic; letter-spacing: -.06em; margin-bottom: 12px; }
+  .footer-copy { color: #9999a1; font-size: 13px; line-height: 1.65; max-width: 380px; }
+  .footer-label { color: var(--teal); font: 800 10px ui-monospace, monospace; letter-spacing: .25em; margin-bottom: 14px; }
+  .footer-nav a { display: block; color: #a9a9af; font-size: 13px; margin: 0 0 10px; }
+  .footer-nav a:hover { color: var(--teal); }
+  .back-top { border: 1px solid var(--line); border-radius: 999px; padding: 11px 18px; color: #aaaab0; font: 10px ui-monospace, monospace; letter-spacing: .2em; }
+  .copyright { text-align: center; padding: 19px 12px; border-top: 1px solid var(--line); color: #777780; font: 9px ui-monospace, monospace; letter-spacing: .32em; }
+  @media (max-width: 900px) {
+    .social-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-main { grid-template-columns: 1fr 1fr; }
+    .back-top { justify-self: start; }
+    .hero-banner { height: 330px; }
+    .banner-logo { transform: scale(.8); }
+  }
+  @media (max-width: 600px) {
+    .topbar { min-height: 58px; padding: 0 5%; }
+    .brandline { font-size: 9px; letter-spacing: .18em; }
+    .manage { font-size: 9px; padding: 8px 10px; }
+    .hero-banner { height: 260px; }
+    .banner-logo { transform: scale(.54); width: 620px; justify-content: center; }
+    .intro { padding: 48px 5% 55px; }
+    h1 { font-size: clamp(42px, 12vw, 68px); }
+    .subtitle { font-size: 18px; }
+    .contact { font-size: 13px; line-height: 1.6; margin-bottom: 34px; }
+    .section { padding: 0 5% 62px; }
+    .social-grid { grid-template-columns: 1fr; gap: 10px; }
+    .vote-card { padding: 18px; gap: 14px; }
+    .vote-card .vote-link { border-top: 1px solid #29292d; padding: 15px 0 0; min-width: 0; }
+    .footer-main { padding: 38px 5%; grid-template-columns: 1fr; gap: 28px; }
+    .copyright { font-size: 8px; letter-spacing: .18em; }
+  }
+
+
+
+  .about-section {
+    padding-top: 0;
+    padding-bottom: 90px;
+  }
+  .about-content {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 34px 30px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 16px;
+  }
+  .about-content p {
+    margin: 0;
+    color: #b8b8bf;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  /* Category cards with room for a category image */
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .category-image {
+    width: 100%;
+    aspect-ratio: 3 / 2.8;
+    display: block;
+    object-fit: contain;
+    background: #1b1b1e;
+    border-bottom: 1px solid var(--line);
+  }
+  .category-grid .category {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10;
+    overflow: hidden;
+    border: 1px solid #303035;
+    border-radius: 10px;
+    background: #19191c;
+    color: #c6c6cb;
+    min-width: 0;
+  }
+  .category-grid .category:hover,
+  .category-grid .category:focus-visible {
+    color: var(--teal);
+    border-color: rgba(19, 255, 243, 0.55);
+    background: #1a2221;
+    outline: none;
+  }
+  .category-card-copy {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px;
+    font-size: 12px;
+    line-height: 1.45;
+    flex: 1;
+  }
+  @media (max-width: 900px) {
+    .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    .about-section { padding-bottom: 62px; }
+    .about-content { padding: 25px 20px; }
+    .about-content p { font-size: 14px; }
+    .category-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Scroll reveal: sections and cards gently slide up as they enter view */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(34px);
+    transition:
+      opacity .85s cubic-bezier(.22, 1, .36, 1),
+      transform .85s cubic-bezier(.22, 1, .36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll,
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      will-change: auto;
+    }
+  }
+
+
+  /* Interactive particles span the intro, current votings, and social media sections */
+  .particle-area { position: relative; isolation: isolate; overflow: hidden; }
+  .particle-area > .intro, .particle-area > main { position: relative; z-index: 1; }
+  .particle-area > .intro { overflow: visible; }
+  #intro-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .82;
+  }
+  .particle-area > #intro-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .82;
+  }
+  .particle-area > .intro > *, .particle-area > main > * { position: relative; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    #intro-particles { display: none; }
+  }
+
+</style>
+</head>
+<body id="top">
+<header class="topbar">
+  <a class="brandline" href="#top">BINI VOTING TEAM <b>/</b> LINK HUB</a>
+
+  <nav class="topnav" aria-label="Main navigation">
+    <a href="#about">About Us</a>
+    <a href="#voting">Current Votings</a>
+    <a href="#campaigns">Campaigns</a>
+    <a href="#social">Social Media</a>
+  </nav>
+</header>
+
+<section class="hero-banner" aria-label="BINI Voting Team banner">
+  <!-- Add your own image as hero-banner.jpg in the same folder as this HTML file.
+       Change the filename in .hero-banner background CSS if needed. -->
+</section>
+
+
+<div class="particle-area">
+  <canvas id="intro-particles" aria-hidden="true"></canvas>
+<section class="intro">
+    <div class="section-head">
+    <h2 class="section-kicker">About Us</h2>
+    <span class="section-number">01</span>
+  </div>
+  <div class="intro-content">
+    <h1>BINI VOTING TEAM</h1>
+    <p class="subtitle">We Are The Official Voting Team with Team Bloom PH</p>
+    <p class="contact"><span class="mail">✉️</span>For inquiries, feel free to e-mail us at <a href="mailto:binivotingteam@gmail.com">binivotingteam@gmail.com</a></p>
+    
+  </div>
+<div class="about-content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </div>
+</section>
+
+<main>
+  <section class="section" id="voting">
+    <div class="section-head">
+      <h2 class="section-kicker">Current votings</h2>
+      <span class="section-number">02</span>
+    </div>
+    <div class="voting-grid">
+      <article class="vote-card">
+        <div class="vote-top"><div class="vote-title">BreakTudo Awards 2026</div><span class="status">VOTING OPEN</span></div>
+        <div class="category-grid" aria-label="BreakTudo Awards categories">
+          <a class="category" href="https://vote.breaktudoawards.com/vote/grupo-feminino-internacional/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="womens-group.png" alt="International Women’s Group category"><span class="category-card-copy"><span>International Women’s Group — BINI</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://vote.breaktudoawards.com/vote/clipe-internacional-do-ano/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="music-video.png" alt="International Music Video category"><span class="category-card-copy"><span>International Music Video — SWEET TOOTH</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://vote.breaktudoawards.com/vote/fandom-internacional-do-ano/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="fandom.png" alt="International Fandom category"><span class="category-card-copy"><span>International Fandom — BLOOMs</span><span class="category-arrow">↗</span></span></a>
+        </div>
+        <a class="vote-link" href="x" target="_blank" rel="noopener noreferrer">VOTE NOW <span>↗</span></a>
+      </article>
+
+      <article class="vote-card">
+        <div class="vote-top"><div class="vote-title">Kids’ Choice Awards 2026</div><span class="status">VOTE NOW</span></div>
+        <div class="category-grid" aria-label="Kids’ Choice Awards categories">
+          <a class="category" href="https://kca.nick.tv/vote/favorite-global-music-star" target="_blank" rel="noopener noreferrer"><img class="category-image" src="KCA.jpg" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Favorite Global Music Star — BINI</span><span class="category-arrow">↗</span></span></a>
+        </div>
+        <a class="vote-link" href="x" target="_blank" rel="noopener noreferrer">VOTE NOW <span>↗</span></a>
+      </article>
+
+      <article class="vote-card">
+        <div class="vote-top"><div class="vote-title">LionhearTV’s RAWR Awards 2026</div><span class="status">CHECK VOTING</span></div>
+        <div class="category-grid" aria-label="PPOP Music Awards categories">
+          <a class="category" href="https://www.lionheartv.net/rawrawards/favorite-group/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="favorite-group.png" alt="favorite-group"><span class="category-card-copy"><span>Favorite Group - BINI</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://www.lionheartv.net/rawrawards/favorite-performer/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="favorite-performer.png" alt="Other BINI nominations category"><span class="category-card-copy"><span>Favorite Performer - BINI</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://www.lionheartv.net/rawrawards/song-of-the-year/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="song-of-the-year.png" alt="Other BINI nominations category"><span class="category-card-copy"><span>Song of the Year - BLUSH</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://www.lionheartv.net/rawrawards/fan-club-of-the-year/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="fan-club-of-the-year.png" alt="Other BINI nominations category"><span class="category-card-copy"><span>Fan Club of the Year - BLOOMS</span><span class="category-arrow">↗</span></span></a>
+        </div>
+        <a class="vote-link" href="x" target="_blank" rel="noopener noreferrer">VOTE NOW <span>↗</span></a>
+      </article>
+
+      <article class="vote-card">
+        <div class="vote-top"><div class="vote-title">11th PPOP Music Awards 2026</div><span class="status">VOTE NOW</span></div>
+        <div class="category-grid" aria-label="Kids’ Choice Awards categories">
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=pG1wQZz5n82JivSDhtg2" target="_blank" rel="noopener noreferrer"><img class="category-image" src="group-of-the-year.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Group of the Year - BINI</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=oAebLXzquyrUEtAQbSUG" target="_blank" rel="noopener noreferrer"><img class="category-image" src="fandom-of-the-year.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Fandom of the Year - BLOOMS</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=v7UHD1fyxP03ocSDJ6hi" target="_blank" rel="noopener noreferrer"><img class="category-image" src="visual.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Visual of the Year - AIAH</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=5eKWNphPgpsYuPg7Ksd3" target="_blank" rel="noopener noreferrer"><img class="category-image" src="ace.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Ace of the Year - COLET</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=gg3OvppU3RxDpzJmt7nr" target="_blank" rel="noopener noreferrer"><img class="category-image" src="vocal.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Vocalist of the Year - MALOI</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=S2FCB23a7XvNtqtUTrbk" target="_blank" rel="noopener noreferrer"><img class="category-image" src="rapper.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Rapper of the Year - MIKHA</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=C4nULLk9CsZ0izVU4rc2" target="_blank" rel="noopener noreferrer"><img class="category-image" src="leader.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Leader of the Year - JHOANNA</span><span class="category-arrow">↗</span></span></a>
+          <a class="category" href="https://juancast.ph/castvote.php?pollID=wYDUIOZwYbiULQ3cyXVQ" target="_blank" rel="noopener noreferrer"><img class="category-image" src="dancer.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Dancer of the Year - SHEENA</span><span class="category-arrow">↗</span></span></a>
+        </div>
+        <a class="vote-link" href="x" target="_blank" rel="noopener noreferrer">VOTE NOW <span>↗</span></a>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section social-section" id="social">
+    <div class="section-head">
+      <h2 class="section-kicker">Social media</h2>
+      <span class="section-number">03</span>
+    </div>
+    <div class="social-grid">
+      <a class="social-card" href="https://www.facebook.com/binivotingteamofc" target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">f</span><span><span class="social-name">Facebook</span><span class="external">↗</span><div class="domain">FACEBOOK.COM</div></span>
+      </a>
+      <a class="social-card" href="https://www.tiktok.com/@binivotingteam" target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">♪</span><span><span class="social-name">TikTok</span><span class="external">↗</span><div class="domain">TIKTOK.COM</div></span>
+      </a>
+      <a class="social-card" href="https://x.com/BINIVotingTeam" target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">𝕏</span><span><span class="social-name">X (Twitter)</span><span class="external">↗</span><div class="domain">X.COM</div></span>
+      </a>
+      <a class="social-card" href="https://www.instagram.com/binivotingteam/" target="_blank" rel="noopener noreferrer">
+        <span class="social-icon">◎</span><span><span class="social-name">Instagram</span><span class="external">↗</span><div class="domain">INSTAGRAM.COM</div></span>
+      </a>
+    </div>
+  </section>
+</main>
+</div>
+
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-brand">BINI VOTING TEAM</div>
+      <div class="footer-copy">The Official Voting Team
+        <br>✉️For inquiries, feel free to e-mail us at binivotingteam@gmail.com</div>
+    </div>
+    <nav class="footer-nav" aria-label="On this page">
+      <div class="footer-label">ON THIS PAGE</div>
+      <a href="#about">About Us</a>
+      <a href="#voting">All votings</a>
+      <a href="#social">Social media</a>
+    </nav>
+    <a class="back-top" href="#top">BACK TO TOP ↑</a>
+  </div>
+  <div class="copyright">© 2026 BINI VOTING TEAM</div>
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const revealItems = document.querySelectorAll(
+      ".about-section .section-head, .about-content, .intro-content, #voting .section-head, #voting .vote-card, #voting .category, #social .section-head, #social .social-card, .footer-main, .copyright"
+    );
+
+    revealItems.forEach((item, index) => {
+      item.classList.add("reveal-on-scroll");
+      if (item.matches(".vote-card, .social-card")) {
+        item.style.transitionDelay = `${(index % 4) * 90}ms`;
+      }
+    });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealItems.forEach(item => item.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          currentObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -45px 0px"
+    });
+
+    revealItems.forEach(item => observer.observe(item));
+  });
+</script>
+
+
+<script>
+(() => {
+  const section = document.querySelector(".particle-area");
+  const canvas = document.getElementById("intro-particles");
+  if (!section || !canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  let width = 0, height = 0, particles = [], rafId = 0, lastTime = 0;
+
+  const pointer = { x: -1000, y: -1000, active: false };
+  const colors = [
+    "rgba(67, 232, 216, 0.48)",
+    "rgba(185, 240, 242, 0.34)",
+    "rgba(67, 232, 216, 0.24)"
+  ];
+
+  // Tweak these values to customize the particle behavior.
+  const SETTINGS = {
+    countPerArea: 5000,       // Lower = more particles
+    driftSpeed: 1,          // Higher = faster continuous movement
+    cursorRepelRadius: 130,    // Distance at which cursor repels particles
+    cursorRepelStrength: 2.8,  // Higher = stronger push away from cursor
+    linkDistance: 80,          // Maximum distance for connecting lines
+    linkOpacity: 0.98
+  };
+
+  function resizeCanvas() {
+    const rect = section.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = rect.width;
+    height = rect.height;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.max(
+  28,
+  Math.min(400, Math.round((width * height) / SETTINGS.countPerArea))
+);
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * SETTINGS.driftSpeed,
+      vy: (Math.random() - 0.5) * SETTINGS.driftSpeed,
+      radius: Math.random() * 1.8 + 0.5,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    }));
+  }
+
+  function onPointerMove(event) {
+    const rect = section.getBoundingClientRect();
+    pointer.x = event.clientX - rect.left;
+    pointer.y = event.clientY - rect.top;
+    pointer.active = true;
+  }
+
+  function onPointerLeave() {
+    pointer.active = false;
+  }
+
+  function draw(time = 0) {
+    if (!section.isConnected || reducedMotion.matches) {
+      cancelAnimationFrame(rafId);
+      return;
+    }
+
+    const delta = Math.min((time - (lastTime || time)) / 16.67, 2);
+    lastTime = time;
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      // Keep particles moving continuously, even when the cursor is still.
+      p.x += p.vx * delta;
+      p.y += p.vy * delta;
+
+      // Wrap around the edges so particles keep circulating through the section.
+      if (p.x < -4) p.x = width + 4;
+      if (p.x > width + 4) p.x = -4;
+      if (p.y < -4) p.y = height + 4;
+      if (p.y > height + 4) p.y = -4;
+
+      // Repel particles away from the cursor within the configured radius.
+      if (pointer.active) {
+        const dx = p.x - pointer.x;
+        const dy = p.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+
+        if (distance > 0 && distance < SETTINGS.cursorRepelRadius) {
+          const force = (1 - distance / SETTINGS.cursorRepelRadius) * SETTINGS.cursorRepelStrength;
+          p.vx += (dx / distance) * force * 0.08 * delta;
+          p.vy += (dy / distance) * force * 0.08 * delta;
+
+          // Prevent cursor repulsion from making particles shoot away too quickly.
+          const maxSpeed = SETTINGS.driftSpeed * 3.2;
+          const speed = Math.hypot(p.vx, p.vy);
+          if (speed > maxSpeed) {
+            p.vx = (p.vx / speed) * maxSpeed;
+            p.vy = (p.vy / speed) * maxSpeed;
+          }
+        }
+      }
+
+      // Gradually restore each particle's original drift speed after being repelled.
+      const speed = Math.hypot(p.vx, p.vy);
+      if (speed > SETTINGS.driftSpeed && speed > 0) {
+        const restored = Math.max(SETTINGS.driftSpeed, speed - 0.006 * delta);
+        p.vx = (p.vx / speed) * restored;
+        p.vy = (p.vy / speed) * restored;
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+
+      // Draw faint connections between nearby particles.
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const distance = Math.hypot(p.x - q.x, p.y - q.y);
+        if (distance < SETTINGS.linkDistance) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(67, 232, 216, ${SETTINGS.linkOpacity * (1 - distance / SETTINGS.linkDistance)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    rafId = requestAnimationFrame(draw);
+  }
+
+  function start() {
+    cancelAnimationFrame(rafId);
+    if (reducedMotion.matches) {
+      ctx.clearRect(0, 0, width, height);
+      return;
+    }
+    lastTime = 0;
+    rafId = requestAnimationFrame(draw);
+  }
+
+  if (finePointer.matches) {
+    section.addEventListener("pointermove", onPointerMove, { passive: true });
+    section.addEventListener("pointerleave", onPointerLeave, { passive: true });
+  }
+
+  const resizeObserver = new ResizeObserver(resizeCanvas);
+  resizeObserver.observe(section);
+  resizeCanvas();
+  pointer.x = -1000;
+  pointer.y = -1000;
+  start();
+
+  reducedMotion.addEventListener?.("change", start);
+  window.addEventListener("pagehide", () => {
+    cancelAnimationFrame(rafId);
+    resizeObserver.disconnect();
+  }, { once: true });
+})();
+</script>
+
+</body>
+</html>
