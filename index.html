@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090909">
 <title>BINI Voting Team | Link Hub</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <style>
   :root {
     --bg: #090909;
@@ -34,9 +34,12 @@
   justify-content: space-between;
   gap: 24px;
   background: rgba(11,11,11,.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid #1b1b1d;
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .topnav {
@@ -411,7 +414,57 @@
     .banner-logo { transform: scale(.8); }
   }
   @media (max-width: 600px) {
-    .topbar { min-height: 58px; padding: 0 5%; }
+    /* Center all footer content on mobile only */
+    .footer-main {
+      text-align: center;
+      justify-items: center;
+    }
+
+    .footer-copy {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer-nav {
+      width: 100%;
+      text-align: center;
+    }
+
+    .footer-nav a {
+      text-align: center;
+    }
+
+    .back-top {
+      justify-self: center;
+    }
+
+    .topbar {
+      min-height: 58px;
+      padding: 12px 5%;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .topnav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+      gap: 4px;
+      align-items: stretch;
+    }
+    .topnav a {
+      min-width: 0;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      font-size: clamp(7px, 2.3vw, 10px);
+      line-height: 1.25;
+      padding: 8px 2px;
+    }
+    .topnav a::after {
+      bottom: 2px;
+    }
     .brandline { font-size: 9px; letter-spacing: .18em; }
     .hero-banner { height: 260px; }
     .banner-logo { transform: scale(.54); width: 620px; justify-content: center; }
@@ -555,6 +608,12 @@
     #intro-particles { display: none; }
   }
 
+
+/* Keep section headings visible below the sticky header after anchor navigation. */
+#about, #voting, #campaigns, #social {
+  scroll-margin-top: 78px;
+}
+
 </style>
 </head>
 <body id="top">
@@ -601,7 +660,7 @@
     </div>
     <div class="voting-grid">
       <article class="vote-card">
-        <div class="vote-top"><div class="vote-title">BreakTudo Awards 2026</div><span class="status">VOTING OPEN</span></div>
+        <div class="vote-top"><div class="vote-title">BreakTudo Awards 2026</div><span class="status">VOTE NOW</span></div>
         <div class="category-grid" aria-label="BreakTudo Awards categories">
           <a class="category" href="https://vote.breaktudoawards.com/vote/grupo-feminino-internacional/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="womens-group.png" alt="International Women’s Group category"><span class="category-card-copy"><span>International Women’s Group — BINI</span><span class="category-arrow">↗</span></span></a>
           <a class="category" href="https://vote.breaktudoawards.com/vote/clipe-internacional-do-ano/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="music-video.png" alt="International Music Video category"><span class="category-card-copy"><span>International Music Video — SWEET TOOTH</span><span class="category-arrow">↗</span></span></a>
@@ -619,7 +678,7 @@
       </article>
 
       <article class="vote-card">
-        <div class="vote-top"><div class="vote-title">LionhearTV’s RAWR Awards 2026</div><span class="status">CHECK VOTING</span></div>
+        <div class="vote-top"><div class="vote-title">LionhearTV’s RAWR Awards 2026</div><span class="status">VOTE NOW</span></div>
         <div class="category-grid" aria-label="PPOP Music Awards categories">
           <a class="category" href="https://www.lionheartv.net/rawrawards/favorite-group/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="favorite-group.png" alt="favorite-group"><span class="category-card-copy"><span>Favorite Group - BINI</span><span class="category-arrow">↗</span></span></a>
           <a class="category" href="https://www.lionheartv.net/rawrawards/favorite-performer/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="favorite-performer.png" alt="Other BINI nominations category"><span class="category-card-copy"><span>Favorite Performer - BINI</span><span class="category-arrow">↗</span></span></a>
