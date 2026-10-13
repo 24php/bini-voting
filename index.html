@@ -148,11 +148,22 @@
 }
 
   .brandline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 11px;
     letter-spacing: .34em;
     color: #a4a4a9;
     text-transform: uppercase;
+    text-decoration: none;
+  }
+  .brand-logo {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex: 0 0 auto;
   }
   .brandline b { color: var(--teal); margin: 0 9px; }
   .manage {
@@ -614,17 +625,142 @@
   scroll-margin-top: 78px;
 }
 
+
+
+  /* Theme switch: additive styles to preserve the existing layout and branding. */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    color: var(--teal);
+    background: transparent;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .theme-toggle:hover { background: transparent; color: var(--teal); transform: translateY(-1px); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  .theme-icon { font-size: 17px; line-height: 1; }
+
+  html[data-theme="light"] {
+    --bg: #f5fbfb;
+    --panel: #ffffff;
+    --panel-hover: #eaf7f6;
+    --line: #d5e5e5;
+    --muted: #647579;
+    --text: #172326;
+  }
+  html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+  html[data-theme="light"] .topbar { background: rgba(248, 253, 253, .96); border-bottom-color: var(--line); }
+  /* Dark-teal accents for key links and actions in light mode */
+  html[data-theme="light"] .topnav a,
+  html[data-theme="light"] .brandline,
+  html[data-theme="light"] .footer-nav a,
+  html[data-theme="light"] .section-kicker,
+  html[data-theme="light"] .footer-label { color: #075e59; }
+  html[data-theme="light"] .lime-button {
+    background: #075e59;
+    color: #ffffff;
+    border-color: #075e59;
+  }
+  /* In light mode, change the VOTE NOW text only; preserve its background. */
+  html[data-theme="light"] .vote-link,
+  html[data-theme="light"] .status { color: #075e59; }
+  html[data-theme="light"] .vote-link:hover { color: #043f3b; }
+  html[data-theme="light"] .lime-button:hover { background: #064c48; color: #ffffff; }
+  html[data-theme="light"] .social-icon {
+    color: #075e59;
+    background: #e1f1ef;
+    border-color: #a8cfca;
+  }
+  html[data-theme="light"] .topnav a:hover,
+  html[data-theme="light"] .topnav a:focus-visible,
+  html[data-theme="light"] .footer-nav a:hover { color: #043f3b; }
+  html[data-theme="light"] .subtitle { color: #536468; }
+  html[data-theme="light"] .contact { color: #5c6b6f; }
+  html[data-theme="light"] .section-number,
+  html[data-theme="light"] .domain,
+  html[data-theme="light"] .copyright { color: #68797d; }
+  html[data-theme="light"] .vote-card,
+  html[data-theme="light"] .social-card { background: var(--panel); border-color: var(--line); }
+  html[data-theme="light"] .vote-card:hover,
+  html[data-theme="light"] .social-card:hover { background: var(--panel-hover); border-color: #9bcfcb; }
+  /* Light-theme category cards and their nested text areas */
+  html[data-theme="light"] .category,
+  html[data-theme="light"] .category-list-card {
+    background: #e5f3f1;
+    color: #263f40;
+    border-color: #c4ddda;
+  }
+  html[data-theme="light"] .category:hover,
+  html[data-theme="light"] .category:focus-visible,
+  html[data-theme="light"] .category-list-card .category:hover,
+  html[data-theme="light"] .category-list-card .category:focus-visible {
+    background: #d2eae6;
+    color: #075e59;
+    border-color: #8bc8c0;
+  }
+  html[data-theme="light"] .category-list-card .category + .category { border-top-color: #c4ddda; }
+  html[data-theme="light"] .category-card-copy { color: #263f40; }
+  html[data-theme="light"] .category-arrow { color: #087e78; }
+  html[data-theme="light"] .category-card { background: #f0f8f8; border-color: var(--line); }
+  html[data-theme="light"] .category-card button { color: #34484b; }
+  html[data-theme="light"] .category-card button:hover { background: #e0f3f1; }
+  html[data-theme="light"] .category-content { background: #f7fbfb; }
+  html[data-theme="light"] .tag,
+  html[data-theme="light"] .social-handle { background: #e6f6f4; color: #087e78; border-color: #b7dfdc; }
+  html[data-theme="light"] footer { background: #edf5f5; border-top-color: var(--line); }
+  html[data-theme="light"] .footer-copy,
+  html[data-theme="light"] .back-top { color: #536468; }
+  html[data-theme="light"] .back-top { border-color: #c3d7d7; }
+  html[data-theme="light"] .copyright { border-top-color: var(--line); }
+  html[data-theme="light"] .hero-banner { background-color: #eaf6f6; }
+  @media (max-width: 600px) {
+    /* Option 3: place the theme icon at the end of the mobile navigation row. */
+    .topbar { position: sticky; }
+    .brandline { padding-right: 0; gap: 7px; letter-spacing: .16em; }
+    .brand-logo { width: 28px; height: 28px; }
+    .topnav {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+      align-items: center;
+      gap: 4px;
+      padding-right: 0;
+    }
+    .topnav a {
+      min-width: 0;
+      justify-content: center;
+      text-align: center;
+      overflow-wrap: anywhere;
+      font-size: clamp(7px, 2.2vw, 10px);
+      padding: 8px 1px;
+    }
+    .theme-toggle {
+      position: static;
+      width: 30px;
+      height: 30px;
+      justify-self: end;
+      grid-column: auto;
+    }
+  }
+
 </style>
 </head>
 <body id="top">
 <header class="topbar">
-  <a class="brandline" href="#top">BINI VOTING TEAM <b>/</b> LINK HUB</a>
+  <a class="brandline" href="#top"><span>BINI VOTING TEAM <b>/</b> LINK HUB</span></a>
 
   <nav class="topnav" aria-label="Main navigation">
     <a href="#about">About Us</a>
-    <a href="#voting">Votings</a>
+    <a href="#voting">Current Votings</a>
     <a href="#campaigns">Campaigns</a>
     <a href="#social">Social Media</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span class="theme-icon" aria-hidden="true">☀</span></button>
   </nav>
 </header>
 
@@ -655,7 +791,7 @@
 <main>
   <section class="section" id="voting">
     <div class="section-head">
-      <h2 class="section-kicker">Votings</h2>
+      <h2 class="section-kicker">Current votings</h2>
       <span class="section-number">02</span>
     </div>
     <div class="voting-grid">
@@ -806,11 +942,23 @@
   let width = 0, height = 0, particles = [], rafId = 0, lastTime = 0;
 
   const pointer = { x: -1000, y: -1000, active: false };
-  const colors = [
+  const darkThemeColors = [
     "rgba(67, 232, 216, 0.48)",
     "rgba(185, 240, 242, 0.34)",
     "rgba(67, 232, 216, 0.24)"
   ];
+  // Use deeper teal particles in light mode so they remain visible on pale backgrounds.
+  const lightThemeColors = [
+    "rgba(0, 91, 86, 0.58)",
+    "rgba(8, 126, 120, 0.42)",
+    "rgba(0, 91, 86, 0.30)"
+  ];
+  function isLightTheme() {
+    return document.documentElement.dataset.theme === "light";
+  }
+  function particleColors() {
+    return isLightTheme() ? lightThemeColors : darkThemeColors;
+  }
 
   // Tweak these values to customize the particle behavior.
   const SETTINGS = {
@@ -843,9 +991,15 @@
       vx: (Math.random() - 0.5) * SETTINGS.driftSpeed,
       vy: (Math.random() - 0.5) * SETTINGS.driftSpeed,
       radius: Math.random() * 1.8 + 0.5,
-      color: colors[Math.floor(Math.random() * colors.length)]
+      color: particleColors()[Math.floor(Math.random() * particleColors().length)]
     }));
   }
+
+  const themeObserver = new MutationObserver(() => {
+    const palette = particleColors();
+    particles.forEach(p => { p.color = palette[Math.floor(Math.random() * palette.length)]; });
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
   function onPointerMove(event) {
     const rect = section.getBoundingClientRect();
@@ -923,7 +1077,8 @@
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(67, 232, 216, ${SETTINGS.linkOpacity * (1 - distance / SETTINGS.linkDistance)})`;
+          const lineColor = isLightTheme() ? "0, 91, 86" : "67, 232, 216";
+          ctx.strokeStyle = `rgba(${lineColor}, ${SETTINGS.linkOpacity * (1 - distance / SETTINGS.linkDistance)})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
@@ -960,6 +1115,32 @@
     cancelAnimationFrame(rafId);
     resizeObserver.disconnect();
   }, { once: true });
+})();
+</script>
+
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+  const icon = toggle.querySelector('.theme-icon');
+  const savedTheme = (() => { try { return localStorage.getItem('bvt-theme'); } catch (_) { return null; } })();
+  const setTheme = (theme) => {
+    root.setAttribute('data-theme', theme);
+    const light = theme === 'light';
+    icon.textContent = light ? '☾' : '☀';
+    toggle.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    toggle.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.setAttribute('content', light ? '#f5fbfb' : '#090909');
+  };
+  setTheme(savedTheme === 'light' ? 'light' : 'dark');
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    try { localStorage.setItem('bvt-theme', next); } catch (_) {}
+  });
 })();
 </script>
 
