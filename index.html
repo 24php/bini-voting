@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090909">
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J3XGSRDVM4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -313,6 +313,17 @@
     font: 800 11px ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   .section-number { color: #77777d; font: 10px ui-monospace, monospace; letter-spacing: .2em; }
+  .section-description {
+    margin: -12px 0 28px;
+    max-width: 100%;
+    color: #a6a6ad;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  html[data-theme="light"] .section-description { color: #536468; }
+  @media (max-width: 600px) {
+    .section-description { font-size: 13px; margin-top: -10px; margin-bottom: 23px; }
+  }
   .voting-grid { display: flex; flex-direction: column; gap: 12px; }
   .social-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
   .vote-card, .social-card {
@@ -759,6 +770,249 @@
     }
   }
 
+
+
+  /* Image-instruction carousel, placed above the video tutorials */
+  .instruction-carousel { position: relative; margin-bottom: 28px; }
+  .instruction-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 2px 2px 14px;
+  }
+  .instruction-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: var(--bg);
+    scroll-snap-align: start;
+  }
+  /* IMAGE SLOT: put each instruction image file beside this HTML file and use
+     <img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="your-image-filename.png" alt="Describe this instruction">
+     in place of the .instruction-image-placeholder div. */
+  .instruction-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Match the image dimensions used by the voting category cards above. */
+    aspect-ratio: 3 / 2.8;
+    object-fit: contain;
+    background: #1b1b1e;
+    border-bottom: 1px solid var(--line);
+  }
+  /* YOUTUBE SLOT: replace a .tutorial-screen placeholder with the iframe template
+     shown in the HTML comments inside each tutorial card. */
+  .tutorial-screen iframe,
+  .tutorial-embed {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+  }
+
+  .instruction-image-placeholder {
+    /* Keep empty image slots the same size as the category images above. */
+    aspect-ratio: 3 / 2.8;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    text-align: center;
+    color: var(--teal);
+    background: linear-gradient(145deg, #102523, #111317 72%);
+  }
+  .instruction-image-placeholder .step-number {
+    display: grid; place-items: center; width: 42px; height: 42px;
+    margin: 0 auto 12px; border: 1px solid currentColor; border-radius: 50%;
+    font: 800 16px ui-monospace, monospace;
+  }
+  .instruction-image-placeholder strong { display: block; margin-bottom: 7px; font-size: 14px; }
+  .instruction-image-placeholder p { margin: 0; color: #d7e8e7; font-size: 12px; line-height: 1.55; }
+  .instruction-copy { padding: 12px 14px 14px; }
+  .instruction-copy h4 { margin: 0 0 5px; font-size: 14px; }
+  .instruction-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+  html[data-theme="light"] .instruction-card { background: #fff; }
+  html[data-theme="light"] .instruction-image-placeholder { background: linear-gradient(135deg, #d8efec, #edf6f6 72%); color: #075e59; }
+  html[data-theme="light"] .instruction-image-placeholder p { color: #263f40; }
+  .instruction-carousel .tutorial-controls { display: none; }
+  @media (max-width: 760px) {
+    .instruction-track {
+      display: grid;
+      grid-template-columns: none;
+      grid-auto-columns: 78%;
+      grid-auto-flow: column;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--teal) var(--line);
+    }
+    .instruction-card { scroll-snap-align: start; }
+    .instruction-carousel .tutorial-controls { display: flex; }
+  }
+  @media (max-width: 420px) {
+    .instruction-track { grid-auto-columns: 88%; }
+  }
+
+  /* Campaign feature and tutorial video carousel */
+  /* Outer carousel for switching between campaign cards */
+  .campaign-outer-carousel { position: relative; }
+  .campaign-list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 2px 2px 14px;
+    align-items: start;
+  }
+  .campaign-list::-webkit-scrollbar { display: none; }
+  /* Each campaign occupies one full carousel slide; center the narrower card within it. */
+  .campaign-list > .campaign-feature {
+    box-sizing: border-box;
+    width: min(100%, 1000px);
+    max-width: 1000px;
+    justify-self: center;
+    margin: 0;
+    scroll-snap-align: center;
+  }
+  .campaign-outer-controls { display: flex; justify-content: center; align-items: center; gap: 14px; margin: 8px 0 0; }
+  .campaign-outer-controls button {
+    width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%;
+    background: var(--panel); color: var(--teal); font-size: 22px; cursor: pointer;
+    transition: border-color .2s, transform .2s;
+  }
+  .campaign-outer-controls button:hover { border-color: var(--teal); transform: translateY(-1px); }
+  .campaign-outer-controls button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+  .campaign-feature {
+    max-width: 1000px;
+    margin: 0;
+    padding: clamp(20px, 4vw, 34px);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+  }
+  .campaign-feature h3 {
+    margin: 0 0 10px;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -.045em;
+  }
+  .campaign-description { margin: 0 0 4px; color: #b8b8bf; line-height: 1.7; font-size: 14px; }
+  .campaign-deadline { margin: 15px 0 28px; color: var(--teal); font: 800 11px ui-monospace, monospace; letter-spacing: .08em; }
+  .campaign-subhead { margin: 0 0 14px; font-size: 15px; font-weight: 800; }
+
+  .campaign-info-block { margin: 0 0 26px; }
+  .campaign-info-block .campaign-subhead { margin-bottom: 10px; }
+  .campaign-period { margin: 0; color: var(--teal); font-size: clamp(17px, 2vw, 20px); font-weight: 750; line-height: 1.55; }
+  .campaign-nominations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin: 0; padding: 0; list-style: none; }
+  .campaign-nominations li { min-width: 0; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel-hover); color: var(--text); font-size: 13px; line-height: 1.45; }
+  .campaign-nominations strong { display: block; margin-bottom: 3px; color: var(--teal); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+  html[data-theme="light"] .campaign-period { color: #075e59; }
+  html[data-theme="light"] .campaign-nominations li { background: #e5f3f1; border-color: #c4ddda; color: #263f40; }
+  html[data-theme="light"] .campaign-nominations strong { color: #075e59; }
+  @media (max-width: 600px) { .campaign-nominations { grid-template-columns: 1fr; } }
+
+  .tutorial-carousel { position: relative; }
+  .tutorial-track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 2px 2px 14px;
+  }
+  .tutorial-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: var(--bg);
+    scroll-snap-align: start;
+  }
+  .tutorial-screen {
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: linear-gradient(135deg, #102523, #111317 72%);
+    color: var(--teal);
+    text-align: center;
+  }
+  .tutorial-screen .play-symbol { font-size: 34px; line-height: 1; margin-bottom: 9px; }
+  .tutorial-screen p { margin: 0; color: #d7e8e7; font-size: 12px; line-height: 1.5; }
+  .tutorial-copy { padding: 13px 14px 15px; }
+  .tutorial-copy h4 { margin: 0 0 5px; font-size: 14px; }
+  .tutorial-copy p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .tutorial-controls { display: none; justify-content: flex-end; gap: 8px; margin: 2px 0 22px; }
+  .tutorial-controls button {
+    width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%;
+    background: var(--panel); color: var(--teal); font-size: 19px; cursor: pointer;
+  }
+  .tutorial-controls button:hover { border-color: var(--teal); }
+  .campaign-vote-button {
+    display: inline-flex;
+    align-self: flex-start;
+    width: fit-content;
+    margin: 3px auto 0 0;
+    padding: 9px 16px;
+    gap: 10px;
+    font-size: 9px;
+    letter-spacing: .16em;
+  }
+  html[data-theme="light"] .campaign-feature { background: var(--panel); }
+  html[data-theme="light"] .campaign-description { color: #536468; }
+  html[data-theme="light"] .tutorial-screen { background: linear-gradient(135deg, #d8efec, #edf6f6 72%); color: #075e59; }
+  html[data-theme="light"] .tutorial-screen p { color: #263f40; }
+  html[data-theme="light"] .tutorial-card { background: #fff; }
+  html[data-theme="light"] .tutorial-controls button { background: #fff; color: #075e59; }
+  html[data-theme="light"] .campaign-outer-controls button { background: #fff; color: #075e59; }
+  @media (max-width: 760px) {
+    .tutorial-track {
+      grid-template-columns: none;
+      grid-auto-columns: 78%;
+      grid-auto-flow: column;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--teal) var(--line);
+    }
+    .tutorial-card { scroll-snap-align: start; }
+    .tutorial-carousel .tutorial-controls { display: flex; }
+  }
+  @media (max-width: 420px) {
+    .tutorial-track { grid-auto-columns: 88%; }
+    .campaign-feature { padding: 19px 15px; }
+  }
+
+
+  /* Click an instruction image to view it at full size. */
+  .instruction-image { cursor: zoom-in; }
+  .instruction-image:focus-visible { outline: 3px solid var(--teal); outline-offset: -3px; }
+  .image-lightbox {
+    position: fixed; inset: 0; z-index: 3000; display: none;
+    align-items: center; justify-content: center; padding: 24px;
+    background: rgba(0, 0, 0, .88); cursor: zoom-out;
+  }
+  .image-lightbox.is-open { display: flex; }
+  .image-lightbox img {
+    display: block; max-width: min(96vw, 1500px); max-height: 92vh;
+    width: auto; height: auto; object-fit: contain; border-radius: 8px;
+    box-shadow: 0 12px 60px rgba(0,0,0,.5); cursor: default;
+  }
+  .image-lightbox-close {
+    position: absolute; top: 14px; right: 18px; width: 44px; height: 44px;
+    border: 1px solid rgba(255,255,255,.45); border-radius: 50%;
+    background: rgba(20,20,20,.8); color: white; font-size: 28px; line-height: 1;
+    cursor: pointer;
+  }
+  .image-lightbox-close:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+
 </style>
 </head>
 <body id="top">
@@ -789,7 +1043,7 @@
   </div>
   <div class="intro-content">
     <h1>BINI VOTING TEAM</h1>
-    <p class="subtitle">The Official Voting Team of Team&nbsp;Bloom&nbsp;Philippines</p>
+    <p class="subtitle">The Official Voting Team under Team Bloom PH</p>
     <p class="contact"><span class="mail">✉️</span>For inquiries, feel free to e-mail us at <a href="https://mail.google.com/mail/?view=cm&fs=1&to=binivotingteam@gmail.com">binivotingteam@gmail.com</a></p>
     
   </div>
@@ -798,11 +1052,11 @@
 
 BINI Voting Team (BVT) is the official voting team under Team Bloom Philippines, dedicated to organizing and coordinating voting initiatives to support BINI across various award-giving bodies and recognition&nbsp;platforms. <br><br>
 
-This website serves as a centralized hub for all things voting related to BINI. Here, BLOOMs can find compiled voting links for ongoing campaigns, access relevant voting resources, and stay updated on opportunities to support our girls. Our goal is to make voting information accessible and help streamline the community’s collective efforts. <br><br>
+This serves as a centralized hub for all things voting related to BINI. Here, BLOOMs can find compiled voting links for ongoing campaigns, access relevant voting resources, and stay updated on opportunities to support our girls. Our goal is to make voting information accessible and help streamline the community’s collective efforts. <br><br>
 
-Thank you for being part of our efforts to support BINI. Together, let’s continue making every vote count!<br><br>
+BLOOMs, thank you for being part of our efforts to support BINI. Together, let’s continue making every vote count!<br><br>
 
-Lagi’t lagi, #ParaSaBINI! 🌸</p>
+Lagi’t lagi, #ParaSaBINI! ❀</p>
   </div>
 </section>
 
@@ -812,6 +1066,7 @@ Lagi’t lagi, #ParaSaBINI! 🌸</p>
       <h2 class="section-kicker">Links</h2>
       <span class="section-number">02</span>
     </div>
+    <p class="section-description">Find all the latest voting links for BINI’s ongoing award campaigns in one place. Choose a campaign below, cast your votes, and show your support for BINI!</p>
     <div class="voting-grid">
       <article class="vote-card">
         <div class="vote-top"><div class="vote-title">BreakTudo Awards 2026</div><span class="status">VOTE NOW</span></div>
@@ -861,12 +1116,81 @@ Lagi’t lagi, #ParaSaBINI! 🌸</p>
   </section>
 
   <section class="section campaigns-section" id="campaigns">
-    <div class="section-head">
-      <h2 class="section-kicker">Campaigns</h2>
-      <span class="section-number">03</span>
+    <div class="section-head"><h2 class="section-kicker">Campaigns</h2><span class="section-number">03</span></div>
+    <p class="section-description">Explore BINI’s award nominations across various award-giving bodies and recognition platforms, from past campaigns to ongoing ones. Find nominee lists, voting periods, step-by-step instructions, video tutorials, and other essential campaign resources to guide BLOOMs throughout each campaign.</p>
+    <div class="campaign-outer-carousel" aria-label="Campaign cards carousel">
+    <div class="campaign-list" id="campaignCardsTrack" tabindex="0" aria-label="Scroll between campaign cards">
+    <article class="campaign-feature">
+      <h3>BreakTudo Awards 2026</h3>
+      <p class="campaign-description">BreakTudo Awards is an international award show recognizing artists, music, and fandoms worldwide.</p>
+    
+      <div class="campaign-info-block">
+        <h4 class="campaign-subhead"><br>Voting Period</h4>
+        <p class="campaign-period"><strong>📅 September 17, 2026 - October 18, 2026 | 11AM PHT</strong></p>
+      </div>
+      <div class="campaign-info-block">
+        <h4 class="campaign-subhead">Nominations</h4>
+        <ul class="campaign-nominations">
+          <li><strong>International Women’s Group</strong>BINI</li>
+          <li><strong>International Music Video of the Year</strong>“Sweet Tooth”</li>
+          <li><strong>International Fandom of the Year</strong>BLOOMs</li>
+        </ul>
+      </div>
+    <!--  <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
+      <div class="instruction-carousel" aria-label="BreakTudo Awards 2026 image instructions carousel">
+        <div class="instruction-track" id="breaktudoInstructionTrack" tabindex="0" aria-label="Scroll through image instructions"><article class="instruction-card"><!-- IMAGE SLOT: Replace breaktudo-step-1.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="br-how-to-vote.png" alt="BreakTudo Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>How To Vote</h4><p>Follow the guide below for step-by-step voting instructions.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace breaktudo-step-2.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="breaktudo-step-2.png" alt="BreakTudo Awards 2026 voting instructions step 2"><div class="instruction-copy"><h4>Partial Results</h4><p>Check the latest partial results to see the current standings of BINI and BLOOMs.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace breaktudo-step-3.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="breaktudo-step-3.png" alt="BreakTudo Awards 2026 voting instructions step 3"><div class="instruction-copy"><h4>Step 3</h4><p>Complete the process and confirm your vote.</p></div></article></div>
+        <div class="tutorial-controls" aria-label="Image instructions carousel controls"><button type="button" id="breaktudoInstructionPrev" aria-label="Previous instruction images">‹</button><button type="button" id="breaktudoInstructionNext" aria-label="Next instruction images">›</button></div>
+      </div>
+      <h4 class="campaign-subhead">Quick Tutorials · Videos</h4>
+      <div class="tutorial-carousel" aria-label="BreakTudo Awards 2026 video tutorials carousel">
+        <div class="tutorial-track" id="breaktudoTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://www.youtube.com/embed/XumvQZN-GgY?si=pb8s1CK7YDB5cmWv" title="BreakTudo Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="BreakTudo Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="BreakTudo Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
+        <div class="tutorial-controls" aria-label="Video carousel controls"><button type="button" id="breaktudoTutorialPrev" aria-label="Previous tutorials">‹</button><button type="button" id="breaktudoTutorialNext" aria-label="Next tutorials">›</button></div>
+      </div>
+      <a class="lime-button campaign-vote-button" href="https://vote.breaktudoawards.com" target="_blank" rel="noopener noreferrer">VOTE NOW <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="campaign-feature">
+      <h3>Kids’ Choice Awards 2026</h3>
+      <p class="campaign-description">Support BINI in the Favorite Global Music Star category at the 2026 Kids’ Choice Awards with the voting information and guides below.</p>
+      <div class="campaign-info-block">
+        <h4 class="campaign-subhead"><br>Voting Period</h4>
+        <p class="campaign-period">Voting ends on <strong>November 13, 2026</strong>.</p>
+      </div>
+      <div class="campaign-info-block">
+        <h4 class="campaign-subhead">Nominations</h4>
+        <ul class="campaign-nominations">
+          <li><strong>Favorite Global Music Star: ASIA</strong>BINI</li>
+        </ul>
+      </div>
+     <!-- <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
+      <div class="instruction-carousel" aria-label="Kids’ Choice Awards 2026 image instructions carousel">
+        <div class="instruction-track" id="kcaInstructionTrack" tabindex="0" aria-label="Scroll through image instructions"><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-1.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>How To Vote</h4><p>Getting started with the voting page.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-2.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="kca-step-2.png" alt="Kids’ Choice Awards 2026 voting instructions step 2"><div class="instruction-copy"><h4>Step 2</h4><p>Follow the instructions to cast your vote.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-3.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="kca-step-3.png" alt="Kids’ Choice Awards 2026 voting instructions step 3"><div class="instruction-copy"><h4>Step 3</h4><p>Complete the process and confirm your vote.</p></div></article></div>
+        <div class="tutorial-controls" aria-label="Image instructions carousel controls"><button type="button" id="kcaInstructionPrev" aria-label="Previous instruction images">‹</button><button type="button" id="kcaInstructionNext" aria-label="Next instruction images">›</button></div>
+      </div>
+      <h4 class="campaign-subhead">Quick Tutorials · Videos</h4>
+      <div class="tutorial-carousel" aria-label="Kids’ Choice Awards 2026 video tutorials carousel">
+        <div class="tutorial-track" id="kcaTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
+        <div class="tutorial-controls" aria-label="Video carousel controls"><button type="button" id="kcaTutorialPrev" aria-label="Previous tutorials">‹</button><button type="button" id="kcaTutorialNext" aria-label="Next tutorials">›</button></div>
+      </div>
+      <a class="lime-button campaign-vote-button" href="https://kca.nick.tv/vote/favorite-global-music-star" target="_blank" rel="noopener noreferrer">VOTE NOW <span aria-hidden="true">↗</span></a>
+    </article>
     </div>
-    <div class="about-content">
-      <p>Campaign updates and participation details will be shared here.</p>
+    <div class="campaign-outer-controls" aria-label="Campaign carousel controls">
+      <button type="button" id="campaignCardsPrev" aria-label="Previous campaign">‹</button>
+      <span class="campaign-slide-label" id="campaignSlideLabel" aria-live="polite">Campaign 1 of 2</span>
+      <button type="button" id="campaignCardsNext" aria-label="Next campaign">›</button>
+    </div>
     </div>
   </section>
 
@@ -875,6 +1199,7 @@ Lagi’t lagi, #ParaSaBINI! 🌸</p>
       <h2 class="section-kicker">Social media</h2>
       <span class="section-number">04</span>
     </div>
+    <p class="section-description">Stay connected with BINI Voting Team through our official social media platforms. Follow us for the latest voting updates, campaign announcements, reminders, and other resources to help BLOOMs stay informed and involved.</p>
     <div class="social-grid">
       <a class="social-card" href="https://www.facebook.com/binivotingteamofc" target="_blank" rel="noopener noreferrer">
         <span class="social-icon">f</span><span><span class="social-name">Facebook</span><span class="external">↗</span><div class="domain">FACEBOOK.COM</div></span>
@@ -1160,6 +1485,102 @@ Lagi’t lagi, #ParaSaBINI! 🌸</p>
     setTheme(next);
     try { localStorage.setItem('bvt-theme', next); } catch (_) {}
   });
+})();
+</script>
+
+
+<script>
+(() => {
+  function attachCarousel(trackId, prevId, nextId, cardSelector) {
+    const track = document.getElementById(trackId);
+    const prev = document.getElementById(prevId);
+    const next = document.getElementById(nextId);
+    if (!track || !prev || !next) return;
+    const scrollAmount = () => {
+      const card = track.querySelector(cardSelector);
+      return card ? card.getBoundingClientRect().width + 12 : track.clientWidth;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+  }
+  ['breaktudo', 'kca'].forEach(prefix => {
+    attachCarousel(prefix + 'InstructionTrack', prefix + 'InstructionPrev', prefix + 'InstructionNext', '.instruction-card');
+    attachCarousel(prefix + 'TutorialTrack', prefix + 'TutorialPrev', prefix + 'TutorialNext', '.tutorial-card');
+  });
+
+  const campaignTrack = document.getElementById('campaignCardsTrack');
+  const campaignPrev = document.getElementById('campaignCardsPrev');
+  const campaignNext = document.getElementById('campaignCardsNext');
+  const campaignLabel = document.getElementById('campaignSlideLabel');
+  if (campaignTrack && campaignPrev && campaignNext) {
+    const cards = Array.from(campaignTrack.querySelectorAll('.campaign-feature'));
+    const updateCampaignLabel = () => {
+      if (!campaignLabel || !cards.length) return;
+      const trackRect = campaignTrack.getBoundingClientRect();
+      let current = 0;
+      let closest = Infinity;
+      cards.forEach((card, index) => {
+        const distance = Math.abs(card.getBoundingClientRect().left - trackRect.left);
+        if (distance < closest) { closest = distance; current = index; }
+      });
+      campaignLabel.textContent = `Campaign ${current + 1} of ${cards.length}`;
+    };
+    const scrollCampaign = direction => {
+      const card = cards[0];
+      if (!card) return;
+      campaignTrack.scrollBy({ left: direction * (card.getBoundingClientRect().width + 18), behavior: 'smooth' });
+      window.setTimeout(updateCampaignLabel, 300);
+    };
+    campaignPrev.addEventListener('click', () => scrollCampaign(-1));
+    campaignNext.addEventListener('click', () => scrollCampaign(1));
+    campaignTrack.addEventListener('scroll', () => window.requestAnimationFrame(updateCampaignLabel), { passive: true });
+    updateCampaignLabel();
+  }
+})();
+</script>
+
+
+<div class="image-lightbox" id="imageLightbox" role="dialog" aria-modal="true" aria-label="Full-size instruction image">
+  <button class="image-lightbox-close" id="imageLightboxClose" type="button" aria-label="Close full-size image">&times;</button>
+  <img id="imageLightboxImg" alt="Full-size instruction image">
+</div>
+<script>
+(() => {
+  const lightbox = document.getElementById('imageLightbox');
+  const fullImage = document.getElementById('imageLightboxImg');
+  const closeButton = document.getElementById('imageLightboxClose');
+  if (!lightbox || !fullImage || !closeButton) return;
+  let lastFocused = null;
+  const close = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    fullImage.removeAttribute('src');
+    if (lastFocused) lastFocused.focus();
+  };
+  const open = image => {
+    lastFocused = image;
+    fullImage.src = image.currentSrc || image.src;
+    fullImage.alt = image.alt || 'Full-size instruction image';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeButton.focus();
+  };
+  document.querySelectorAll('.instruction-image, .category-image').forEach(image => {
+    image.style.cursor = 'zoom-in';
+    image.addEventListener('click', () => open(image));
+    image.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(image); }
+    });
+    image.setAttribute('tabindex', '0');
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', (image.alt || 'Image') + ' — view full size');
+  });
+  closeButton.addEventListener('click', close);
+  lightbox.addEventListener('click', event => { if (event.target === lightbox) close(); });
+  fullImage.addEventListener('click', event => event.stopPropagation());
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && lightbox.classList.contains('is-open')) close(); });
 })();
 </script>
 
