@@ -807,14 +807,14 @@
   .tutorial-embed {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 1 / 1;
     height: auto;
     border: 0;
   }
 
   .instruction-image-placeholder {
     /* Keep empty image slots the same size as the category images above. */
-    aspect-ratio: 3 / 2.8;
+    aspect-ratio: 1 / 1;
     display: grid;
     place-items: center;
     padding: 18px;
@@ -896,6 +896,42 @@
     border: 1px solid var(--line);
     border-radius: 18px;
     background: var(--panel);
+  }
+  /* Campaign voting status indicator */
+  .campaign-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .campaign-title-row h3 { margin: 0; flex: 1; min-width: 0; }
+  .campaign-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    flex: 0 0 auto;
+    margin-top: 3px;
+    padding: 7px 10px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font: 800 9px ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .08em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .campaign-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .campaign-status.is-ongoing { color: #35d07f; background: rgba(53, 208, 127, .09); }
+  .campaign-status.is-ended { color: #ff626b; background: rgba(255, 98, 107, .09); }
+  @media (max-width: 480px) {
+    .campaign-title-row { gap: 8px; }
+    .campaign-status { font-size: 8px; padding: 6px 8px; }
   }
   .campaign-feature h3 {
     margin: 0 0 10px;
@@ -1087,7 +1123,7 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
       </article>
 
       <article class="vote-card" id="lion">
-        <div class="vote-top"><div class="vote-title">LionhearTV’s RAWR Awards 2026</div><span class="status">VOTE NOW</span></div>
+        <div class="vote-top"><div class="vote-title">RAWR Awards 2026</div><span class="status">VOTE NOW</span></div>
         <div class="category-grid" aria-label="PPOP Music Awards categories">
           <a class="category" href="https://www.lionheartv.net/rawrawards/favorite-group/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="favorite-group.png" alt="favorite-group"><span class="category-card-copy"><span>Favorite Group - BINI</span><span class="category-arrow">↗</span></span></a>
           <a class="category" href="https://www.lionheartv.net/rawrawards/favorite-performer/" target="_blank" rel="noopener noreferrer"><img class="category-image" src="favorite-performer.png" alt="Other BINI nominations category"><span class="category-card-copy"><span>Favorite Performer - BINI</span><span class="category-arrow">↗</span></span></a>
@@ -1097,7 +1133,7 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
         <a class="vote-link" href="x" target="_blank" rel="noopener noreferrer">VOTE NOW <span>↗</span></a>
       </article>
 
-      <article class="vote-card" id="ppop">
+     <!-- <article class="vote-card" id="ppop">
         <div class="vote-top"><div class="vote-title">11th PPOP Music Awards 2026</div><span class="status">VOTE NOW</span></div>
         <div class="category-grid" aria-label="Kids’ Choice Awards categories">
           <a class="category" href="https://juancast.ph/castvote.php?pollID=pG1wQZz5n82JivSDhtg2" target="_blank" rel="noopener noreferrer"><img class="category-image" src="group-of-the-year.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Group of the Year - BINI</span><span class="category-arrow">↗</span></span></a>
@@ -1110,7 +1146,7 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
           <a class="category" href="https://juancast.ph/castvote.php?pollID=wYDUIOZwYbiULQ3cyXVQ" target="_blank" rel="noopener noreferrer"><img class="category-image" src="dancer.png" alt="Favorite Global Music Star category"><span class="category-card-copy"><span>Dancer of the Year - SHEENA</span><span class="category-arrow">↗</span></span></a>
         </div>
         <a class="vote-link" href="x" target="_blank" rel="noopener noreferrer">VOTE NOW <span>↗</span></a>
-      </article>
+      </article>-->
 
     </div>
   </section>
@@ -1122,13 +1158,13 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
     <div class="campaign-list" id="campaignCardsTrack" tabindex="0" aria-label="Scroll between campaign cards">
 
 
-    <article class="campaign-feature">
-      <h3>BreakTudo Awards 2026</h3>
-      <p class="campaign-description">BreakTudo Awards is an international award show recognizing artists, music, and fandoms worldwide.</p>
+    <article class="campaign-feature" data-voting-end="2026-10-18">
+      <div class="campaign-title-row"><h3>BreakTudo Awards 2026</h3><span class="campaign-status" aria-live="polite">Checking status</span></div>
+      <p class="campaign-description">The BreakTudo Awards is an annual Brazilian pop culture awards show created in 2016 that honors national and international figures in music, television, and internet content creation.</p>
     
       <div class="campaign-info-block">
         <h4 class="campaign-subhead"><br>Voting Period</h4>
-        <p class="campaign-period"><strong>📅 September 17, 2026 - October 18, 2026 | 11AM PHT</strong></p>
+        <p class="campaign-period"><strong>📅 09/17/2026 - 10/18/2026</strong></p>
       </div>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead">Nominations</h4>
@@ -1141,15 +1177,15 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
     <!--  <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
       <div class="instruction-carousel" aria-label="BreakTudo Awards 2026 image instructions carousel">
         <div class="instruction-track" id="breaktudoInstructionTrack" tabindex="0" aria-label="Scroll through image instructions"><article class="instruction-card"><!-- IMAGE SLOT: Replace breaktudo-step-1.png with your image file (keep this filename), or change src below. -->
-<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="br-how-to-vote.png" alt="BreakTudo Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>How To Vote</h4><p>Follow the guide below for step-by-step voting instructions.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace breaktudo-step-2.png with your image file (keep this filename), or change src below. -->
-<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="br-partial-results.png" alt="BreakTudo Awards 2026 voting instructions step 2"><div class="instruction-copy"><h4>Partial Results</h4><p>Check the latest partial results to see the current standings of BINI and BLOOMs.</p></div></article><!-- IMAGE SLOT: Replace breaktudo-step-3.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="br-how-to-vote.png" alt="BreakTudo Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>Voting Instructions</h4><p>Follow the guide for a step-by-step voting instructions.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace breaktudo-step-2.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="br-partial-results.png" alt="BreakTudo Awards 2026 voting instructions step 2"><div class="instruction-copy"><h4>Latest Results</h4><p>Check the latest partial results to see the current standings of BINI and BLOOMs.</p></div></article><!-- IMAGE SLOT: Replace breaktudo-step-3.png with your image file (keep this filename), or change src below. -->
         <div class="tutorial-controls" aria-label="Image instructions carousel controls"><button type="button" id="breaktudoInstructionPrev" aria-label="Previous instruction images">‹</button><button type="button" id="breaktudoInstructionNext" aria-label="Next instruction images">›</button></div>
       </div>
-      <h4 class="campaign-subhead">Quick Tutorials · Videos</h4>
+      <h4 class="campaign-subhead">Tutorial Videos</h4>
       <div class="tutorial-carousel" aria-label="BreakTudo Awards 2026 video tutorials carousel">
         <div class="tutorial-track" id="breaktudoTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://www.youtube.com/embed/JLF41DPRN1I?si=IPMzIGGZnIr0r4GZ" title="BreakTudo Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://www.youtube.com/embed/pjgGChskd10?si=-9qSnvC2mmXbm2FG" title="BreakTudo Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad0e5a32c6388d890ecc0d0?background=false&autoplay=false&loop=false&disable_player_controls=false" title="BreakTudo Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad0e6522c6388d890ecc427?background=false&autoplay=false&loop=false&disable_player_controls=false" title="BreakTudo Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
 <div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad0e57c20ccc955bd17abc2?background=false&autoplay=false&loop=false&disable_player_controls=false" title="BreakTudo Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
         <div class="tutorial-controls" aria-label="Video carousel controls"><button type="button" id="breaktudoTutorialPrev" aria-label="Previous tutorials">‹</button><button type="button" id="breaktudoTutorialNext" aria-label="Next tutorials">›</button></div>
       </div>
@@ -1157,12 +1193,12 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
     </article>
 
 
-    <article class="campaign-feature">
-      <h3>Kids’ Choice Awards 2026</h3>
-      <p class="campaign-description">The Kids’ Choice Awards (KCA) is an annual awards show by Nickelodeon that celebrates fan-favorite stars, music, and entertainment through public voting.</p>
+    <article class="campaign-feature" data-voting-end="2026-11-13">
+      <div class="campaign-title-row"><h3>Kids’ Choice Awards 2026</h3><span class="campaign-status" aria-live="polite">Checking status</span></div>
+      <p class="campaign-description">The Nickelodeon Kids' Choice Awards (KCAs) is an annual American awards show produced by Nickelodeon that honors the year's biggest acts in television, film, music, and sports, with winners chosen through worldwide viewer voting.</p>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead"><br>Voting Period</h4>
-        <p class="campaign-period"><strong>📅 October 8, 2026 - November 13, 2026</strong>.</p>
+        <p class="campaign-period"><strong>📅 10/08/2026 - 11/13/2026</strong></p>
       </div>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead">Nominations</h4>
@@ -1173,28 +1209,28 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
      <!-- <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
       <div class="instruction-carousel" aria-label="Kids’ Choice Awards 2026 image instructions carousel">
         <div class="instruction-track" id="kcaInstructionTrack" tabindex="0" aria-label="Scroll through image instructions"><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-1.png with your image file (keep this filename), or change src below. -->
-<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="kca-how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>How To Vote</h4><p>Follow the guide below for step-by-step voting instructions.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-2.png with your image file (keep this filename), or change src below. -->
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="kca-how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>Voting Instructions</h4><p>Follow the guide for a step-by-step voting instructions.</p></div></article><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-2.png with your image file (keep this filename), or change src below. -->
 <img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="default-hashtags.png" alt="Kids’ Choice Awards 2026 voting instructions step 2"><div class="instruction-copy"><h4>Default Hashtags</h4><p>Use our official KCA hashtags in your posts to help boost BINI’s visibility and keep our campaign organized across social media.</p></div></article><!-- IMAGE SLOT: Replace kca-step-3.png with your image file (keep this filename), or change src below. -->
         <div class="tutorial-controls" aria-label="Image instructions carousel controls"><button type="button" id="kcaInstructionPrev" aria-label="Previous instruction images">‹</button><button type="button" id="kcaInstructionNext" aria-label="Next instruction images">›</button></div>
       </div>
-      <h4 class="campaign-subhead">Quick Tutorials · Videos</h4>
+      <h4 class="campaign-subhead">Tutorial Videos</h4>
       <div class="tutorial-carousel" aria-label="Kids’ Choice Awards 2026 video tutorials carousel">
         <div class="tutorial-track" id="kcaTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://www.youtube.com/embed/0Nb2lNu_a28?si=UXFeIBCvJCU5qPv_" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://www.youtube.com/embed/NR-vwYCkU1s?si=szwUEPAEUkK81Duc" title="Kids’ Choice Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://www.youtube.com/embed/lPBfBn3-xsw?si=lbybVw9JnTnx08_b" title="Kids’ Choice Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad0e6b020ccc955bd17b064?background=false&autoplay=false&loop=false&disable_player_controls=false" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad0e6c720ccc955bd17b0c5?background=false&autoplay=false&loop=false&disable_player_controls=false" title="Kids’ Choice Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card"><!-- VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. -->
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad0e6d42c6388d890ecc607?background=false&autoplay=false&loop=false&disable_player_controls=false" title="Kids’ Choice Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
         <div class="tutorial-controls" aria-label="Video carousel controls"><button type="button" id="kcaTutorialPrev" aria-label="Previous tutorials">‹</button><button type="button" id="kcaTutorialNext" aria-label="Next tutorials">›</button></div>
       </div>
       <a class="lime-button campaign-vote-button" href="#kca" rel="noopener noreferrer">VOTE NOW <span aria-hidden="true">↗</span></a>
     </article>
 
 
-      <article class="campaign-feature">
-      <h3>LionhearTV’s RAWR Awards 2026</h3>
-      <p class="campaign-description">LionhearTV’s RAWR Awards honors outstanding Filipino entertainment personalities and acts across music, television, and other entertainment categories.</p>
+      <article class="campaign-feature" data-voting-end="2026-11-04">
+      <div class="campaign-title-row"><h3>RAWR Awards 2026</h3><span class="campaign-status" aria-live="polite">Checking status</span></div>
+      <p class="campaign-description">The RAWR Awards is an annual fan-powered Philippine entertainment awards event launched in 2015 and presented by LionhearTV, a digital entertainment and lifestyle platform.</p>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead"><br>Voting Period</h4>
-        <p class="campaign-period">Voting ends on <strong>November 13, 2026</strong>.</p>
+        <p class="campaign-period"><strong>📅 10/08/2026 – 11/04/2026</strong></p>
       </div>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead">Nominations</h4>
@@ -1208,27 +1244,27 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
      <!-- <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
       <div class="instruction-carousel" aria-label="Kids’ Choice Awards 2026 image instructions carousel">
         <div class="instruction-track" id="kcaInstructionTrack" tabindex="0" aria-label="Scroll through image instructions"><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-1.png with your image file (keep this filename), or change src below. -->
-<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="lion-how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>How To Vote</h4><p>Getting started with the voting page.</p></div></article>
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="lion-how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>Voting Instructions</h4><p>Follow the guide for a step-by-step voting instructions.</p></div></article>
         <div class="tutorial-controls" aria-label="Image instructions carousel controls"><button type="button" id="kcaInstructionPrev" aria-label="Previous instruction images">‹</button><button type="button" id="kcaInstructionNext" aria-label="Next instruction images">›</button></div>
       </div>
-     <!-- <h4 class="campaign-subhead">Quick Tutorials · Videos</h4>
+     <h4 class="campaign-subhead">Tutorial Videos</h4>
       <div class="tutorial-carousel" aria-label="Kids’ Choice Awards 2026 video tutorials carousel">
-        <div class="tutorial-track" id="kcaTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card"> VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. 
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card">VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below. 
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card">VIDEO SLOT: Paste the full YouTube embed URL into src="PASTE_YOUTUBE_EMBED_URL_HERE" below.
+        <div class="tutorial-track" id="kcaTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card">
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card">
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card">
 <div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
         <div class="tutorial-controls" aria-label="Video carousel controls"><button type="button" id="kcaTutorialPrev" aria-label="Previous tutorials">‹</button><button type="button" id="kcaTutorialNext" aria-label="Next tutorials">›</button></div>
-      </div>-->
+      </div>
       <a class="lime-button campaign-vote-button" href="#lion" rel="noopener noreferrer">VOTE NOW <span aria-hidden="true">↗</span></a>
     </article>
 
 
-          <article class="campaign-feature">
-      <h3>11th PPOP Music Awards 2026</h3>
-      <p class="campaign-description">The PPOP Music Awards celebrates Filipino pop music and recognizes the achievements of P-pop artists and their dedicated fandoms.</p>
+          <article class="campaign-feature" data-voting-end="2026-10-15">
+      <div class="campaign-title-row"><h3>11th PPOP Music Awards 2026</h3><span class="campaign-status" aria-live="polite">Checking status</span></div>
+      <p class="campaign-description">The P-Pop Music Awards (also known as the Philippine Popular Music Awards) is an annual awards ceremony in the Philippines, established in 2016, that honors the best artists, groups, and creators in the local Pinoy Pop (P-pop) music industry.</p>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead"><br>Voting Period</h4>
-        <p class="campaign-period">Voting ends on <strong>November 13, 2026</strong>.</p>
+        <p class="campaign-period"><strong>📅 09/18/2026 to 10/15/2026</strong></p>
       </div>
       <div class="campaign-info-block">
         <h4 class="campaign-subhead">Nominations</h4>
@@ -1246,7 +1282,7 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
      <!-- <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
       <div class="instruction-carousel" aria-label="Kids’ Choice Awards 2026 image instructions carousel">
         <div class="instruction-track" id="kcaInstructionTrack" tabindex="0" aria-label="Scroll through image instructions"><article class="instruction-card"><!-- IMAGE SLOT: Replace kca-step-1.png with your image file (keep this filename), or change src below. -->
-<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="ppop-how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>How To Vote</h4><p>Getting started with the voting page.</p></div></article>
+<img class="instruction-image" tabindex="0" role="button" aria-label="Open image full size" src="ppop-how-to-vote.png" alt="Kids’ Choice Awards 2026 voting instructions step 1"><div class="instruction-copy"><h4>Voting Instructions</h4><p>Follow the guide for a step-by-step voting instructions.</p></div></article>
         <div class="tutorial-controls" aria-label="Image instructions carousel controls"><button type="button" id="kcaInstructionPrev" aria-label="Previous instruction images">‹</button><button type="button" id="kcaInstructionNext" aria-label="Next instruction images">›</button></div>
       </div>
       <!--<h4 class="campaign-subhead">Quick Tutorials · Videos</h4>
@@ -1657,6 +1693,25 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
   lightbox.addEventListener('click', event => { if (event.target === lightbox) close(); });
   fullImage.addEventListener('click', event => event.stopPropagation());
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && lightbox.classList.contains('is-open')) close(); });
+})();
+</script>
+
+
+<script>
+// Automatically show Ongoing through the final voting date, then switch to Ended.
+(() => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  document.querySelectorAll('.campaign-feature[data-voting-end]').forEach(card => {
+    const badge = card.querySelector('.campaign-status');
+    if (!badge) return;
+    const endDate = new Date(card.dataset.votingEnd + 'T00:00:00');
+    const ongoing = today <= endDate;
+    badge.textContent = ongoing ? 'Ongoing' : 'Ended';
+    badge.classList.toggle('is-ongoing', ongoing);
+    badge.classList.toggle('is-ended', !ongoing);
+    badge.setAttribute('aria-label', 'Voting status: ' + (ongoing ? 'Ongoing' : 'Ended'));
+  });
 })();
 </script>
 
