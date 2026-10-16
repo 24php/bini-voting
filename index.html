@@ -952,7 +952,12 @@
   html[data-theme="light"] .campaign-period { color: #075e59; }
   html[data-theme="light"] .campaign-nominations li { background: #e5f3f1; border-color: #c4ddda; color: #263f40; }
   html[data-theme="light"] .campaign-nominations strong { color: #075e59; }
-  @media (max-width: 600px) { .campaign-nominations { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) {
+    .campaign-nominations { grid-template-columns: 1fr; }
+    /* Show PPOP nominations in two columns on mobile only. */
+    .ppop-campaign .campaign-nominations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ppop-campaign .campaign-nominations li { padding: 10px; font-size: 12px; overflow-wrap: anywhere; }
+  }
 
   .tutorial-carousel { position: relative; }
   .tutorial-track {
@@ -1259,7 +1264,7 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
     </article>
 
 
-          <article class="campaign-feature" data-voting-end="2026-10-15">
+          <article class="campaign-feature ppop-campaign" data-voting-end="2026-10-15">
       <div class="campaign-title-row"><h3>11th PPOP Music Awards 2026</h3><span class="campaign-status" aria-live="polite">Checking status</span></div>
       <p class="campaign-description">The P-Pop Music Awards (also known as the Philippine Popular Music Awards) is an annual awards ceremony in the Philippines, established in 2016, that honors the best artists, groups, and creators in the local Pinoy Pop (P-pop) music industry.</p>
       <div class="campaign-info-block">
@@ -1267,7 +1272,7 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
         <p class="campaign-period"><strong>📅 09/18/2026 to 10/15/2026</strong></p>
       </div>
       <div class="campaign-info-block">
-        <h4 class="campaign-subhead">Nominations</h4>
+        <h4 class="campaign-subhead">Fan-Choice Categories</h4>
         <ul class="campaign-nominations">
           <li><strong>Group of the Year</strong>BINI</li>
           <li><strong>Fandom of the Year</strong>BLOOMS</li>
@@ -1277,6 +1282,15 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
           <li><strong>Rapper of the Year</strong>MIKHA</li>
           <li><strong>Leader of the Year</strong>JHOANNA</li>
           <li><strong>Dancer of the Year</strong>SHEENA</li>
+        </ul>
+      </div>
+      <div class="campaign-info-block">
+        <h4 class="campaign-subhead">Major Award Categories</h4>
+        <ul class="campaign-nominations">
+          <li><strong>Artist of the Year</strong>BINI</li>
+          <li><strong>Song of the Year</strong>BLUSH</li>
+          <li><strong>Production and Design in a Music Video</strong>BLUSH</li>
+          <li><strong>Choreography in a Video Performance</strong>STEPBACK</li>
         </ul>
       </div>
      <!-- <h4 class="campaign-subhead">How to Vote · Image Instructions</h4> -->
