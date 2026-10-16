@@ -949,6 +949,8 @@
   .campaign-nominations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin: 0; padding: 0; list-style: none; }
   .campaign-nominations li { min-width: 0; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel-hover); color: var(--text); font-size: 13px; line-height: 1.45; }
   .campaign-nominations strong { display: block; margin-bottom: 3px; color: var(--teal); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+  .campaign-nominations li[data-winner="true"] { border-color: rgba(231, 189, 84, .72); background: rgba(231, 189, 84, .08); }
+  html[data-theme="light"] .campaign-nominations li[data-winner="true"] { background: #fff8e6; border-color: #d9b34c; }
   html[data-theme="light"] .campaign-period { color: #075e59; }
   html[data-theme="light"] .campaign-nominations li { background: #e5f3f1; border-color: #c4ddda; color: #263f40; }
   html[data-theme="light"] .campaign-nominations strong { color: #075e59; }
@@ -1255,9 +1257,9 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
      <h4 class="campaign-subhead">Tutorial Videos</h4>
       <div class="tutorial-carousel" aria-label="Kids’ Choice Awards 2026 video tutorials carousel">
         <div class="tutorial-track" id="kcaTutorialTrack" tabindex="0" aria-label="Scroll through voting tutorials"><article class="tutorial-card">
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card">
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad20f713df6b6f5c98226c7?background=false&autoplay=false&loop=false&disable_player_controls=false" title="Kids’ Choice Awards 2026 PC / Laptop voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for desktop and laptop.</p></div></article><article class="tutorial-card">
 <div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 iPad / Tablet voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>iPad / Tablet</h4><p>Step-by-step voting guide for tablets.</p></div></article><article class="tutorial-card">
-<div class="tutorial-screen"><iframe class="tutorial-embed" src="PASTE_YOUTUBE_EMBED_URL_HERE" title="Kids’ Choice Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>Mobile</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
+<div class="tutorial-screen"><iframe class="tutorial-embed" src="https://play.gumlet.io/embed/6ad21078942ca93b73b8d404?background=false&autoplay=false&loop=false&disable_player_controls=false" title="Kids’ Choice Awards 2026 Mobile voting tutorial" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="tutorial-copy"><h4>PC / Laptop</h4><p>Step-by-step voting guide for phones.</p></div></article></div>
         <div class="tutorial-controls" aria-label="Video carousel controls"><button type="button" id="kcaTutorialPrev" aria-label="Previous tutorials">‹</button><button type="button" id="kcaTutorialNext" aria-label="Next tutorials">›</button></div>
       </div>
       <a class="lime-button campaign-vote-button" href="#lion" rel="noopener noreferrer">VOTE NOW <span aria-hidden="true">↗</span></a>
@@ -1276,12 +1278,12 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
         <ul class="campaign-nominations">
           <li><strong>Group of the Year</strong>BINI</li>
           <li><strong>Fandom of the Year</strong>BLOOMS</li>
-          <li><strong>Visual of the Year</strong>AIAH</li>
-          <li><strong>Ace of the Year</strong>COLET</li>
+          <li data-winner="true"><strong>Visual of the Year</strong>AIAH</li>
+          <li data-winner="true"><strong>Ace of the Year</strong>COLET</li>
           <li><strong>Vocalist of the Year</strong>MALOI</li>
           <li><strong>Rapper of the Year</strong>MIKHA</li>
-          <li><strong>Leader of the Year</strong>JHOANNA</li>
-          <li><strong>Dancer of the Year</strong>SHEENA</li>
+          <li data-winner="true"><strong>Leader of the Year</strong>JHOANNA</li>
+          <li data-winner="true"><strong>Dancer of the Year</strong>SHEENA</li>
         </ul>
       </div>
       <div class="campaign-info-block">
@@ -1724,7 +1726,15 @@ Lagi’t lagi, #ParaSaBINI! ❀</p>
     badge.textContent = ongoing ? 'Ongoing' : 'Ended';
     badge.classList.toggle('is-ongoing', ongoing);
     badge.classList.toggle('is-ended', !ongoing);
+    card.classList.toggle('is-ended', !ongoing);
+    card.classList.toggle('is-ongoing', ongoing);
     badge.setAttribute('aria-label', 'Voting status: ' + (ongoing ? 'Ongoing' : 'Ended'));
+  });
+
+  // On mobile, any nomination list with more than five entries becomes two columns.
+  // This also applies automatically to campaign cards added later.
+  document.querySelectorAll('.campaign-feature .campaign-nominations').forEach(list => {
+    list.classList.toggle('has-two-mobile-columns', list.querySelectorAll('li').length > 5);
   });
 })();
 </script>
